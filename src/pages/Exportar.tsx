@@ -1,6 +1,7 @@
 // src/pages/Exportar.tsx
 import { useEffect, useState } from "react";
 import { obterTodasJornadas, limparJornadas } from "../utils/storage";
+import * as XLSX from "xlsx";
 
 export default function Exportar() {
   const [jornadas, setJornadas] = useState<any[]>([]);
@@ -9,18 +10,16 @@ export default function Exportar() {
     obterTodasJornadas().then(setJornadas);
   }, []);
 
-  const exportar = () => {
-    const blob = new Blob([JSON.stringify(jornadas, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
+  const exportarParaExcel = () => {
+    if (jornadas.length === 0) return alert("Nenhuma jornada para exportar.");
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "jornadas_paypal.json";
-    a.click();
+    // Transforma objetos em linhas de Excel
+    const ws = XLSX.utils.json_to_sheet(jornadas);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Jornadas");
 
-    URL.revokeObjectURL(url);
+    // Cria e baixa o arquivo
+    XLSX.writeFile(wb, "jornadas_paypal.xlsx");
   };
 
   const limpar = async () => {
@@ -37,10 +36,10 @@ export default function Exportar() {
 
       <div className="flex gap-4">
         <button
-          onClick={exportar}
+          onClick={exportarParaExcel}
           className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
         >
-          📥 Baixar JSON
+          📊 Baixar Excel
         </button>
 
         {/* <button

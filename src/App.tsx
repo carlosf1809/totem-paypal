@@ -9,6 +9,9 @@ import Beneficios from "./pages/Beneficios";
 import Acao from "./pages/Acao";
 import Fim from "./pages/Fim";
 import Exportar from "./pages/Exportar";
+import ChatIA from "./pages/ChatIA"; // <- aqui está certo
+import ChatJuridico from "./ChatJuridico";
+import './App.css'
 function App() {
   return (
     <JornadaProvider>
@@ -22,10 +25,9 @@ function App() {
           <Route path="/beneficios" element={<Beneficios />} />
           <Route path="/acao" element={<Acao />} />
           <Route path="/fim" element={<Fim />} />
-          
-
+          <Route path="/chat-ia" element={<ChatIA />} />
           <Route path="/exportar" element={<Exportar />} />
-
+          <Route path="/chat-juridico" element={<ChatJuridico />} />
         </Routes>
       </BrowserRouter>
     </JornadaProvider>
