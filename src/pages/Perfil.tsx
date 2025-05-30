@@ -2,7 +2,6 @@ import { useJornada } from "../context/JornadaContext";
 import { useNavigate } from "react-router-dom";
 import AvatarLeo from "../assets/avatar-leo.png";
 import AvatarAna from "../assets/avatar-ana.png";
-import AvatarRobo from "../assets/avatar-robo.png";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import TextoAnimado from "../components/TextoAnimado";
@@ -10,76 +9,98 @@ import TextoAnimado from "../components/TextoAnimado";
 export default function Perfil() {
   const { atualizar } = useJornada();
   const navigate = useNavigate();
-
   const [mostrarAvatares, setMostrarAvatares] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMostrarAvatares(true);
-    }, 1600); // espera o texto animar antes de mostrar os avatares
-
+    const timer = setTimeout(() => setMostrarAvatares(true), 1600);
     return () => clearTimeout(timer);
   }, []);
 
   const selecionarPerfil = (perfil: "leo" | "ana") => {
     atualizar({ perfil });
-    navigate("/presenca");
-  };
-
-  const acessarIA = () => {
-    navigate("/chat-ia");
+    navigate("/local-cliente");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-10 text-white">
+      {/* Título */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="mb-8 text-5xl font-bold text-center"
+        className="mb-36 text-center w-[80%]"
       >
-        <TextoAnimado texto="Como voce se identifica no mercado hoje?" delayBase={0} />
+        <p className="text-2xl md:text-4xl font-semibold text-[#6CC3FF] mb-2">
+          Conte mais sobre você.
+        </p>
+        <TextoAnimado
+          texto="Como você se identifica no mercado hoje?"
+          delayBase={0.2}
+          className="text-6xl md:text-5xl font-bold"
+        />
       </motion.div>
 
+      {/* Cards de perfil */}
       {mostrarAvatares && (
-        <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-6 w-full max-w-6xl">
+        <div className="flex flex-col gap-24 w-full max-w-4xl">
           {/* Léo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 hover:shadow-[0_35px_35px_rgba(0,0,0,0.5)] cursor-pointer transition text-center"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
             onClick={() => selecionarPerfil("leo")}
+            className="
+              flex items-center gap-10 relative 
+              bg-[#011d50] hover:bg-[#003087] transition-colors 
+              rounded-3xl px-6 py-6 cursor-pointer shadow-lg 
+              active:scale-95 select-none
+            "
           >
-            <img src={AvatarLeo} alt="Avatar Léo" className="mx-auto w-40 h-40 object-contain mb-4" />
-            <h3 className="text-xl font-bold text-[#002e80]">Sou como o Léo</h3>
-            <p className="text-sm text-gray-600 mt-1">Tenho um site e quero vender mais</p>
+            <div className="relative">
+              <div className="bg-white rounded-3xl p-3">
+                <img
+                  src={AvatarLeo}
+                  alt="Avatar Léo"
+                  className="w-64 h-64 object-contain"
+                />
+              </div>
+              <button
+                className="absolute left-12/12 -translate-x-1/2 bottom-[-20px] bg-[#0070E0] text-white text-sm font-semibold px-12 py-3 rounded-sm shadow w-max whitespace-nowrap"
+              >
+                Minha empresa é de pequeno ou médio porte
+              </button>
+            </div>
+            <p className="text-[#6CC3FF] text-2xl font-semibold">Oi, eu sou o Léo.</p>
           </motion.div>
 
           {/* Ana */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 hover:shadow-[0_35px_35px_rgba(0,0,0,0.5)] cursor-pointer transition text-center"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
             onClick={() => selecionarPerfil("ana")}
+            className="
+              flex items-center gap-10 relative 
+              bg-[#011d50] hover:bg-[#003087] transition-colors 
+              rounded-3xl px-6 py-6 cursor-pointer shadow-lg 
+              active:scale-95 select-none
+            "
           >
-            <img src={AvatarAna} alt="Avatar Ana" className="mx-auto w-40 h-40 object-contain mb-4" />
-            <h3 className="text-xl font-bold text-[#002e80]">Sou como a Ana</h3>
-            <p className="text-sm text-gray-600 mt-1">Quero escalar com performance</p>
-          </motion.div>
-
-          {/* IA */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 hover:shadow-[0_35px_35px_rgba(0,0,0,0.5)] cursor-pointer transition text-center"
-            onClick={acessarIA}
-          >
-            <img src={AvatarRobo} alt="Avatar IA" className="mx-auto w-40 h-40 object-contain mb-4" />
-            <h3 className="text-xl font-bold text-[#002e80]">Quero uma sugestão inteligente</h3>
-            <p className="text-sm text-gray-600 mt-1">Converse com nossa IA e descubra a solução ideal</p>
+            <div className="relative">
+              <div className="bg-white rounded-3xl p-3">
+                <img
+                  src={AvatarAna}
+                  alt="Avatar Ana"
+                  className="w-64 h-64 object-contain"
+                />
+              </div>
+              <button
+                className="absolute left-12/12 -translate-x-1/2 bottom-[-20px] bg-[#0070E0] text-white text-sm font-semibold px-12 py-3 rounded-sm shadow w-max whitespace-nowrap"
+              >
+                Minha empresa é de grande porte
+              </button>
+            </div>
+            <p className="text-[#6CC3FF] text-2xl font-semibold">Olá, sou a Ana.</p>
           </motion.div>
         </div>
       )}

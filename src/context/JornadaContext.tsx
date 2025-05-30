@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 
 
 export type Perfil = "leo" | "ana" | null;
-export type Canal = "site" | "redes" | "ecommerce" | null;
-
+export type Canal = "site" | "redes" | "ecommerce";
 interface JornadaData {
   perfil: Perfil;
-  canal: Canal;
+  canal: Canal[];            // agora é array
   desafios: string[];
   email?: string;
 }
+
 
 interface JornadaContextType {
   dados: JornadaData;
@@ -22,7 +22,7 @@ const JornadaContext = createContext<JornadaContextType | undefined>(undefined);
 
 const defaultValues: JornadaData = {
   perfil: null,
-  canal: null,
+  canal: [],     // array vazio
   desafios: [],
   email: undefined,
 };

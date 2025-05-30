@@ -1,3 +1,4 @@
+// src/pages/Fim.tsx
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useJornada } from "../context/JornadaContext";
@@ -15,72 +16,80 @@ export default function Fim() {
     navigate("/");
   };
 
-  useEffect(() => {
-    salvarNovaJornada(dados);
+  // useEffect(() => {
+  //   salvarNovaJornada(dados);
 
-    const myCanvas = canvasRef.current;
-    if (myCanvas) {
-      const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
-      myConfetti({
-        particleCount: 150,
-        spread: 90,
-        origin: { y: 0.6 }
-      });
-    }
+  //   const myCanvas = canvasRef.current;
+  //   if (myCanvas) {
+  //     const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
+  //     myConfetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+  //   }
 
-    const timeout = setTimeout(reiniciar, 10000);
-    return () => clearTimeout(timeout);
-  }, []);
+  //   const timeout = setTimeout(reiniciar, 10000);
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center gap-6 overflow-hidden">
-      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" />
+    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
+      {/* Canvas de confete */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      />
 
-      <motion.h2
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-bold text-green-700 z-10"
-      >
-        🎉 Missão Cumprida!
-      </motion.h2>
+      {/* Conteúdo */}
+      <div className="z-10 w-full max-w-3xl px-6 flex flex-col">
+        {/* Título */}
+        <motion.h1
+          className="text-5xl md:text-8xl font-extrabold leading-snug text-white mb-8"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          Missão<br />Cumprida.
+        </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-        className="text-lg text-blue-900 z-10"
-      >
-        Sua história de sucesso está só começando.
-      </motion.p>
+        {/* Card branco */}
+        <div className="w-full flex items-center justify-center"> 
+          <motion.div
+            className="bg-white text-[#1a1a1a] w-[90%] rounded-2xl p-12 shadow-lg relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <p className="text-xl md:text-4xl font-bold mb-8">
+              Sua história de{" "}
+              <span className="text-[#0070E0] font-semibold">sucesso</span>{" "}
+              está só começando!
+            </p>
 
-      <motion.div
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: [ -30, 0, -10, 0 ], opacity: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-        className="text-7xl z-10"
-      >
-        🚀
-      </motion.div>
+        </motion.div>
+        </div>
 
-      <motion.button
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
-        onClick={reiniciar}
-        className="bg-blue-600 text-white px-6 py-3 rounded-xl text-lg hover:bg-blue-700 transition z-10"
-      >
-        Recomeçar jornada
-      </motion.button>
+        {/* Botão dentro do card */}
+        <div className="w-full flex items-center justify-center z-10 -mt-10"> 
+          <motion.button
+            onClick={reiniciar}
+            className="bg-[#0070E0] hover:bg-[#0059b2] text-4xl w-[70%] -tracking-tighter text-white py-6 px-12 rounded-lg font-medium shadow-md"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            Recomeçar jornada
+          </motion.button>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="text-sm text-gray-500 mt-2 z-10"
-      >
-        (Ou aguarde 10 segundos para reinício automático)
-      </motion.p>
+        </div>
+
+        {/* Imagem de celebração */}
+        <motion.img
+          src="/assets/fim-imagem.jpg"
+          alt="Pessoas celebrando"
+          className="w-full mt-12 rounded-3xl object-cover"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+        />
+      </div>
     </div>
   );
 }
