@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build:web": "expo export --platform web"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
