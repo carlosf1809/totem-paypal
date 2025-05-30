@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://carlos.f1809.github.io/totem-paypal",
+  "homepage": "https://carlosf1809.github.io/totem-paypal",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
