@@ -8,6 +8,7 @@ import IconFraud from "../assets/icon-fraud.png";     // ícone “Proteção co
 import ImgCheckout1 from "../assets/pagemento1.png";   // captura de tela 1
 import ImgCheckout2 from "../assets/pagamento2.png";   // captura de tela 2
 
+
 export default function JourneyBraintree() {
   const navigate = useNavigate();
 
@@ -55,7 +56,7 @@ export default function JourneyBraintree() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
         >
-          Com o PayPal/Braintree:
+          Com o PayPal Braintree:
         </motion.h2>
 
         {/* ===== LISTA DE BENEFÍCIOS ===== */}

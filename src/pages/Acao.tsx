@@ -13,10 +13,6 @@ export default function Acao() {
   const [email, setEmail] = useState("");
 
   const enviarEmail = () => {
-    if (!email.includes("@")) {
-      alert("Digite um e-mail válido.");
-      return;
-    }
     atualizar({ email });
     navigate("/fim");
   };

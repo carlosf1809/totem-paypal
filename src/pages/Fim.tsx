@@ -5,6 +5,7 @@ import { useJornada } from "../context/JornadaContext";
 import { salvarNovaJornada } from "../utils/storage";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
+import pay from "../assets/pay.jpg";
 
 export default function Fim() {
   const navigate = useNavigate();
@@ -81,14 +82,8 @@ export default function Fim() {
         </div>
 
         {/* Imagem de celebração */}
-        <motion.img
-          src="/assets/fim-imagem.jpg"
-          alt="Pessoas celebrando"
-          className="w-full mt-12 rounded-3xl object-cover"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-        />
+        <img src={pay} alt="Ícone" className="w-full mt-12 rounded-3xl object-cover" />
+        
       </div>
     </div>
   );

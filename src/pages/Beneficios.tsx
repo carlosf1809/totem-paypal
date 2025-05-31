@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useEffect } from "react";
 import { useJornada } from "../context/JornadaContext";
+import IconeTrofeu from "../assets/trofeu.png";
 
 export default function MaisSuperpoderes() {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ export default function MaisSuperpoderes() {
   };
 
   return (
-    <div className="w-full h-screen flex items-start justify-center overflow-auto py-12">
+    <div className="w-full h-screen flex items-center justify-center overflow-auto py-12">
       <div className="max-w-3xl w-full px-8">
         {/* === Título Geral === */}
         <motion.h2
@@ -86,12 +87,12 @@ export default function MaisSuperpoderes() {
               //   navigate("/journey-braintree");
               // }}
             >
-              Conheça o PayPal/Braintree:
+              Conheça o PayPal Braintree:
             </motion.button>
 
             {/* 2) Lista de “superpoderes” do Braintree */}
             <motion.ul
-              className="space-y-5 mb-12"
+              className="space-y-10 mb-24"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -115,8 +116,7 @@ export default function MaisSuperpoderes() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.8, duration: 0.5 }}
             >
-              {/* Coloque aqui algum ícone de troféu ou imagem de final */}
-              <CheckCircle className="text-white w-10 h-10" />
+              <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
             </motion.div>
           </>
         ) : (
@@ -131,7 +131,7 @@ export default function MaisSuperpoderes() {
               whileHover={{ scale: 1.02 }}
               onClick={() => {
                 // Exemplo: navegar para a página de “JourneyPPCP”
-                navigate("/journey-ppcp");
+                // navigate("/journey-ppcp");
               }}
             >
               Ver mais detalhes
@@ -139,7 +139,7 @@ export default function MaisSuperpoderes() {
 
             {/* 2) Lista de “superpoderes” do PPCP */}
             <motion.ul
-              className="space-y-5"
+              className="space-y-12"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -163,8 +163,7 @@ export default function MaisSuperpoderes() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.8, duration: 0.5 }}
             >
-              {/* Coloque aqui algum ícone de troféu ou imagem de final */}
-              <CheckCircle className="text-white w-10 h-10" />
+              <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
             </motion.div>
           </>
         )}
