@@ -5,7 +5,7 @@ import { MicrophoneIcon } from "@heroicons/react/24/solid";
 import { enviarPerguntaIA } from "../services/ia";
 import TecladoVirtual from "../components/TecladoVirtual";
 import AvatarBot from "../assets/avatar-robo.png";
-import AvatarUser from "../assets/avatar-ana.png";
+// import AvatarUser from "../assets/avatar-ana.png";
 
 export default function ChatIA() {
   const [mensagens, setMensagens] = useState<string[]>([
@@ -100,9 +100,9 @@ export default function ChatIA() {
               >
                 {texto}
               </div>
-              {isUser && (
+              {/* {isUser && (
                 <img src={AvatarUser} alt="Você" className="w-8 h-8 rounded-full ml-2" />
-              )}
+              )} */}
             </div>
           );
         })}

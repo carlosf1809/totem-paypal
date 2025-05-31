@@ -96,7 +96,7 @@ export default function ViloesLimite() {
         onClick={proximo}
         disabled={selecionados.length === 0}
         className={`
-          mt-12 px-10 py-4 rounded-lg font-semibold text-lg transition-all
+          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all
           ${selecionados.length
             ? "bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer"
             : "bg-gray-500 text-gray-300 cursor-not-allowed"}
@@ -114,7 +114,7 @@ export default function ViloesLimite() {
           ease: "easeInOut",
         }}
       >
-        Avançar
+        Clique em até 3 opções
       </motion.button>
     </div>
   );

@@ -50,15 +50,15 @@ export default function LocalCliente() {
     <div className="flex flex-col items-center justify-center min-h-screen px-6 py-10 text-white text-center">
       {/* Título */}
       <motion.div
-        className="mb-12 max-w-2xl"
+        className="mb-12 w-[90%]"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-lg md:text-xl font-semibold text-[#6CC3FF] mb-2">
+        <p className="text-lg md:text-4xl font-semibold text-[#6CC3FF] mb-2">
           Onde sua história acontece?
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold leading-snug">
+        <h2 className="text-3xl md:text-6xl font-bold leading-snug">
           Todo herói tem seu território. <br />
           Onde seus clientes te encontram?
         </h2>
@@ -73,8 +73,8 @@ export default function LocalCliente() {
               key={op.id}
               onClick={() => toggle(op.id)}
               className={`
-                flex items-center gap-4
-                rounded-2xl p-6 shadow-lg cursor-pointer
+                flex gap-4
+                rounded-2xl justify-center items-center p-6 shadow-lg cursor-pointer
                 transition-all duration-300 focus:outline-none
                 ${active
                   ? "bg-[#0070E0] text-white"
@@ -86,8 +86,8 @@ export default function LocalCliente() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <img src={op.icon} alt="" className="w-10 h-10 flex-shrink-0" />
-              <span className="text-lg font-medium">{op.text}</span>
+              <img src={op.icon} alt="" className="w-24 h-24 flex-shrink-0" />
+              <span className="text-2xl text-black font-medium">{op.text}</span>
             </motion.button>
           );
         })}
