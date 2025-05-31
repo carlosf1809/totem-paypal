@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
 
-export type Perfil = "leo" | "ana" | null;
+export type Perfil = "pequenas/medias" | "grandes" | null;
 export type Canal = "site" | "redes" | "ecommerce";
 interface JornadaData {
   perfil: Perfil;

@@ -1,7 +1,7 @@
 import { useJornada } from "../context/JornadaContext";
 import { useNavigate } from "react-router-dom";
-import AvatarLeo from "../assets/avatar-leo.png";
-import AvatarAna from "../assets/avatar-ana.png";
+import AvatarLeo from "../assets/pequenas-medias.png";
+import AvatarAna from "../assets/grande-empresa.png";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import TextoAnimado from "../components/TextoAnimado";
@@ -16,7 +16,7 @@ export default function Perfil() {
     return () => clearTimeout(timer);
   }, []);
 
-  const selecionarPerfil = (perfil: "leo" | "ana") => {
+  const selecionarPerfil = (perfil: "pequenas/medias" | "grandes") => {
     atualizar({ perfil });
     navigate("/local-cliente");
   };
@@ -42,35 +42,35 @@ export default function Perfil() {
 
       {/* Cards de perfil */}
       {mostrarAvatares && (
-        <div className="flex flex-col gap-24 w-full max-w-4xl">
+        <div className="flex flex-col gap-24 w-[45%]">
           {/* Léo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            onClick={() => selecionarPerfil("leo")}
+            onClick={() => selecionarPerfil("pequenas/medias")}
             className="
-              flex items-center gap-10 relative 
-              bg-[#011d50] hover:bg-[#003087] transition-colors 
+              flex items-center justify-center gap-10 relative 
+               hover:bg-[#003087] transition-colors 
               rounded-3xl px-6 py-6 cursor-pointer shadow-lg 
               active:scale-95 select-none
             "
           >
-            <div className="relative">
-              <div className="bg-white rounded-3xl p-3">
+            <div className="relative flex justify-center items-center">
+              <div className="bg-white rounded-xl p-10">
                 <img
                   src={AvatarLeo}
                   alt="Avatar Léo"
-                  className="w-64 h-64 object-contain"
+                  className="w-52 h-52 object-contain"
                 />
               </div>
-              <button
-                className="absolute left-12/12 -translate-x-1/2 bottom-[-20px] bg-[#0070E0] text-white text-sm font-semibold px-12 py-3 rounded-sm shadow w-max whitespace-nowrap"
-              >
-                Minha empresa é de pequeno ou médio porte
-              </button>
             </div>
-            <p className="text-[#6CC3FF] text-2xl font-semibold">Oi, eu sou o Léo.</p>
+              <button
+                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-3xl font-medium px-12 py-3 rounded-sm shadow whitespace-nowrap"
+              >
+                Pequena/média empresa
+              </button>
+            {/* <p className="text-[#6CC3FF] text-2xl font-semibold">Oi, eu sou o Léo.</p> */}
           </motion.div>
 
           {/* Ana */}
@@ -78,29 +78,29 @@ export default function Perfil() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            onClick={() => selecionarPerfil("ana")}
+            onClick={() => selecionarPerfil("grandes")}
             className="
-              flex items-center gap-10 relative 
-              bg-[#011d50] hover:bg-[#003087] transition-colors 
+              flex items-center justify-center gap-10 relative 
+               hover:bg-[#003087] transition-colors 
               rounded-3xl px-6 py-6 cursor-pointer shadow-lg 
               active:scale-95 select-none
             "
           >
-            <div className="relative">
-              <div className="bg-white rounded-3xl p-3">
+            <div className="relative flex justify-center items-center">
+              <div className="bg-white rounded-xl p-10">
                 <img
                   src={AvatarAna}
                   alt="Avatar Ana"
-                  className="w-64 h-64 object-contain"
+                  className="w-52 h-52 object-contain"
                 />
               </div>
-              <button
-                className="absolute left-12/12 -translate-x-1/2 bottom-[-20px] bg-[#0070E0] text-white text-sm font-semibold px-12 py-3 rounded-sm shadow w-max whitespace-nowrap"
-              >
-                Minha empresa é de grande porte
-              </button>
             </div>
-            <p className="text-[#6CC3FF] text-2xl font-semibold">Olá, sou a Ana.</p>
+              <button
+                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-3xl font-medium  px-12 py-3 rounded-sm shadow  whitespace-nowrap"
+              >
+                Grande empresa
+              </button>
+            {/* <p className="text-[#6CC3FF] text-2xl font-semibold">Olá, sou a Ana.</p> */}
           </motion.div>
         </div>
       )}

@@ -7,7 +7,7 @@ export default function Solucao() {
   const { dados } = useJornada();
   const navigate = useNavigate();
 
-  const isAna = dados.perfil === "ana";
+  const isAna = dados.perfil === "grandes";
   const buttonLabel = isAna
     ? "PayPal Complete Payments"
     : "PayPal Braintree";
