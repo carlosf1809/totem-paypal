@@ -38,7 +38,7 @@ echo.
 echo [4/4] Starting development server...
 echo.
 echo ⚡ Server starting at: http://localhost:5173
-echo 🌐 Browser will open automatically in fullscreen
+echo 🌐 Browser will open in TRUE KIOSK MODE (F11 fullscreen)
 echo ⏹️  Press Ctrl+C in this window to stop the server
 echo.
 
@@ -57,42 +57,59 @@ if errorlevel 1 (
 
 echo ✓ Server is ready!
 echo.
-echo 🚀 Opening browser in fullscreen mode...
+echo 🚀 Opening browser in TRUE KIOSK FULLSCREEN mode...
 
-REM Try different browsers in order of preference
+REM Try different browsers with proper kiosk flags
 set "opened=false"
 
-REM Chrome (most common locations)
+REM Chrome with full kiosk mode (best option)
 if exist "C:\Program Files\Google\Chrome\Application\chrome.exe" (
-    start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" --start-fullscreen --app=http://localhost:5173 --disable-web-security --disable-features=VizDisplayCompositor
+    echo ✓ Found Chrome - Starting in kiosk mode...
+    start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" --kiosk --disable-infobars --disable-session-crashed-bubble --disable-translate --no-first-run --disable-default-apps --disable-popup-blocking --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --disable-web-security --disable-features=VizDisplayCompositor --autoplay-policy=no-user-gesture-required http://localhost:5173
     set "opened=true"
+    goto :browseropened
 ) else if exist "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" (
-    start "" "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --start-fullscreen --app=http://localhost:5173 --disable-web-security --disable-features=VizDisplayCompositor
+    echo ✓ Found Chrome (x86) - Starting in kiosk mode...
+    start "" "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --kiosk --disable-infobars --disable-session-crashed-bubble --disable-translate --no-first-run --disable-default-apps --disable-popup-blocking --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows --disable-web-security --disable-features=VizDisplayCompositor --autoplay-policy=no-user-gesture-required http://localhost:5173
     set "opened=true"
+    goto :browseropened
 )
 
-REM Edge if Chrome not found
+REM Edge with kiosk mode if Chrome not found
 if "!opened!"=="false" (
     if exist "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" (
-        start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --start-fullscreen --app=http://localhost:5173
+        echo ✓ Found Edge - Starting in kiosk mode...
+        start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --kiosk --disable-features=msEdgeEnableIEMode http://localhost:5173
         set "opened=true"
+        goto :browseropened
     )
 )
 
-REM Firefox as backup
+REM Firefox with fullscreen if others not found
 if "!opened!"=="false" (
     if exist "C:\Program Files\Mozilla Firefox\firefox.exe" (
-        start "" "C:\Program Files\Mozilla Firefox\firefox.exe" -fullscreen http://localhost:5173
+        echo ✓ Found Firefox - Starting with fullscreen...
+        start "" "C:\Program Files\Mozilla Firefox\firefox.exe" http://localhost:5173
+        timeout /t 3 /nobreak >nul
+        echo Sending F11 for Firefox fullscreen...
+        powershell -command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('{F11}')"
         set "opened=true"
+        goto :browseropened
     )
 )
 
-REM Default browser fallback
+REM Default browser fallback with F11 automation
 if "!opened!"=="false" (
+    echo ⚠️  Using default browser - will send F11 for fullscreen...
     start http://localhost:5173
-    echo.
-    echo ⚠️  Opened in default browser - Press F11 for fullscreen mode
+    timeout /t 3 /nobreak >nul
+    echo Sending F11 key for fullscreen mode...
+    powershell -command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('{F11}')"
+    set "opened=true"
 )
+
+:browseropened
+echo ✅ Browser opened in FULL KIOSK MODE!
 
 echo.
 echo ==========================================
@@ -101,12 +118,13 @@ echo ==========================================
 echo.
 echo   📱 Totem URL: http://localhost:5173
 echo   🔧 This window: Development controls
-echo   🌐 Browser: Application interface
+echo   🌐 Browser: Full kiosk mode interface
 echo.
 echo ℹ️  Instructions:
 echo   • Keep this window open while developing
 echo   • Close this window to stop the server
-echo   • Press Ctrl+C if the server becomes unresponsive
+echo   • Press ESC or F11 in browser to exit fullscreen
+echo   • Press Ctrl+C if server becomes unresponsive
 echo.
 
 echo Press any key to stop the development server...
