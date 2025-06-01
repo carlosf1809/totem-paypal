@@ -10,7 +10,7 @@ export default function MaisSuperpoderes() {
   const { dados } = useJornada();
   const perfil = dados.perfil; // pode ser "leo" | "ana" | null
 
-  // Listas de “superpoderes”
+  // Listas de "superpoderes"
   const poderesPPCP = [
     "Mais conversão.",
     "Checkout rápido.",
@@ -25,13 +25,13 @@ export default function MaisSuperpoderes() {
     "Parcelamento em até 12 vezes",
     "Antecipação de recebíveis*",
     "Débito sem uso de PIN",
-    "3DS 2.0 e Somente Dados",
-    "Atualizador de conta",
+    "3DS 2.0 e Data Only",
+    "Account updater",
     "Carta de circularização",
-    "Proteção contra estornos*",
+    "Proteção contra chargebacks*",
     "Filtros de risco robustos",
     "Painel de controle global",
-    "Carteira Digital (PayPal, Apple Pay, Google Pay)",
+    "Carteiras Digitais (PayPal, Apple Pay, Google Pay)",
   ];
 
   // Framer-Motion: variantes
@@ -70,7 +70,7 @@ export default function MaisSuperpoderes() {
           Senão (perfil === "leo" ou null), mostramos o pacote PPCP
         */}
         {perfil === "grandes" ? (
-          // === BLOCO PARA “ANA” – Grandes Empresas: Braintree ===
+          // === BLOCO PARA "ANA" – Grandes Empresas: Braintree ===
           <>
             {/* 1) CTA principal */}
             <motion.button
@@ -83,7 +83,7 @@ export default function MaisSuperpoderes() {
               Conheça o PayPal Braintree
             </motion.button>
 
-            {/* 2) Lista de “superpoderes” do Braintree */}
+            {/* 2) Lista de "superpoderes" do Braintree */}
             <motion.ul
               className="space-y-10 mb-8"
               initial="hidden"
@@ -102,7 +102,7 @@ export default function MaisSuperpoderes() {
               ))}
             </motion.ul>
 
-            {/* 3) Ícone extra + botão “Avançar” animado */}
+            {/* 3) Ícone extra + botão "Avançar" animado */}
             <motion.div
               className="flex flex-col items-start mt-8"
               initial={{ opacity: 0, scale: 0.5 }}
@@ -115,7 +115,7 @@ export default function MaisSuperpoderes() {
             </motion.div>
           </>
         ) : (
-          // === BLOCO PARA “LEO” – Pequenas/Médias Empresas: PPCP ===
+          // === BLOCO PARA "LEO" – Pequenas/Médias Empresas: PPCP ===
           <>
             {/* 1) CTA principal */}
             <motion.button
@@ -125,14 +125,14 @@ export default function MaisSuperpoderes() {
               transition={{ delay: 0.3, duration: 0.4 }}
               whileHover={{ scale: 1.02 }}
               onClick={() => {
-                // Botão “Ver mais detalhes” pode navegar para outra página
+                // Botão "Ver mais detalhes" pode navegar para outra página
                 navigate("/journey-ppcp"); 
               }}
             >
               Ver mais detalhes
             </motion.button>
 
-            {/* 2) Lista de “superpoderes” do PPCP */}
+            {/* 2) Lista de "superpoderes" do PPCP */}
             <motion.ul
               className="space-y-12 mb-8"
               initial="hidden"
@@ -151,7 +151,7 @@ export default function MaisSuperpoderes() {
               ))}
             </motion.ul>
 
-            {/* 3) Ícone extra + botão “Avançar” animado */}
+            {/* 3) Ícone extra + botão "Avançar" animado */}
             <motion.div
               className="flex flex-col items-start mt-8"
               initial={{ opacity: 0, scale: 0.5 }}
