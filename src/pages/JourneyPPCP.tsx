@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // Ajuste os caminhos conforme seu projeto
-import IconAcquirer from "../assets/icon-acquirer.png"; // ícone “Cresça seu negócio”
-import IconGlobal from "../assets/icon-global.png";     // ícone “Aumente as taxas de conversão”
-import IconFraud from "../assets/icon-fraud.png";       // ícone “Integre e habilite com facilidade”
+import IconAcquirer from "../assets/icon-acquirer.png"; // ícone "Cresça seu negócio"
+import IconGlobal from "../assets/icon-global.png";     // ícone "Aumente as taxas de conversão"
+import IconFraud from "../assets/icon-fraud.png";       // ícone "Integre e habilite com facilidade"
 import PhoneImage from "../assets/phone-payment.png";   // foto do smartphone (ou captura de tela)
+import Pagamento1 from "../assets/pagemento1.png";
+import Pagamento2 from "../assets/pagamento2.png";
 
 export default function JourneyCompletePayments() {
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ export default function JourneyCompletePayments() {
           Com o PayPal Complete Payments:
         </motion.h3>
 
-        {/* === Lista de “superpoderes” === */}
+        {/* === Lista de "superpoderes" === */}
         <motion.div
           className="flex flex-col gap-6"
           variants={listContainerVariants}
@@ -130,6 +132,22 @@ export default function JourneyCompletePayments() {
             alt="Exemplo de tela de pagamento no celular"
             className="w-full object-cover"
           />
+        </motion.div>
+
+        {/* === Payment Images === */}
+        <div className="flex gap-4">
+          <img
+            src={Pagamento1}
+            alt="Pagamento 1"
+            className="w-1/2 object-cover rounded-xl"
+          />
+          <img
+            src={Pagamento2}
+            alt="Pagamento 2"
+            className="w-1/2 object-cover rounded-xl"
+          />
+        </div>
+
         <motion.button
           onClick={() => { navigate("/beneficios"); }}
           className={`
@@ -146,7 +164,6 @@ export default function JourneyCompletePayments() {
         >
           Avançar
         </motion.button>
-        </motion.div>
       </motion.div>
     </div>
   );
