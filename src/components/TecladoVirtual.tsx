@@ -24,10 +24,10 @@ export default function TecladoVirtual({ onInput, onBackspace, onEnter }: Teclad
               <button
                 key={t}
                 className={`bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-lg px-4 py-3 text-xl font-bold shadow-lg transition-all duration-150 ${
-                  t === "space" ? "min-w-[235px] min-h-[68px]" : 
-                  t === "enter" ? "min-w-[98px] min-h-[68px]" :
-                  t === ".com.br" ? "min-w-[88px] min-h-[68px]" :
-                  "min-w-[68px] min-h-[68px]"
+                  t === "space" ? "min-w-[220px] min-h-[65px]" : 
+                  t === "enter" ? "min-w-[92px] min-h-[65px]" :
+                  t === ".com.br" ? "min-w-[82px] min-h-[65px]" :
+                  "min-w-[65px] min-h-[65px]"
                 } hover:shadow-xl transform hover:scale-105 active:scale-95`}
                 onClick={() => {
                   if (t === "back") {
