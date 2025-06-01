@@ -1,6 +1,6 @@
 // src/pages/JourneyBraintree.tsx
 import { useNavigate } from "react-router-dom";
-import {useEffect} from "react"
+import { useEffect } from "react"
 import { motion } from "framer-motion";
 import IconAcquirer from "../assets/icon-acquirer.png"; // ícone “Adquirência própria”
 import IconGlobal from "../assets/icon-global.png";   // ícone “Única integração, alcance global”
@@ -13,12 +13,12 @@ export default function JourneyBraintree() {
   const navigate = useNavigate();
 
   // Se quiser redirecionar automaticamente após alguns segundos, descomente:
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/beneficios");
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/beneficios");
+  //   }, 6000);
+  //   return () => clearTimeout(timer);
+  // }, [navigate]);
 
   // Variants para container de lista (staggered children)
   const listContainer = {
@@ -143,6 +143,22 @@ export default function JourneyBraintree() {
             />
           </motion.div>
         </div>
+        <motion.button
+          onClick={() => { navigate("/beneficios"); }}
+          className={`
+          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: [1, 1.05, 1] }
+          }
+          transition={{
+            delay: 0.8,
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          Avançar
+        </motion.button>
       </motion.div>
     </div>
   );

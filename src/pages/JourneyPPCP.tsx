@@ -13,12 +13,12 @@ export default function JourneyCompletePayments() {
   const navigate = useNavigate();
 
   // (Opcional) se quiser redirecionar automaticamente após 6 segundos:
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/beneficios");
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/beneficios");
+  //   }, 6000);
+  //   return () => clearTimeout(timer);
+  // }, [navigate]);
 
   // Variants para container dos itens (staggered animation)
   const listContainerVariants = {
@@ -130,6 +130,22 @@ export default function JourneyCompletePayments() {
             alt="Exemplo de tela de pagamento no celular"
             className="w-full object-cover"
           />
+        <motion.button
+          onClick={() => { navigate("/beneficios"); }}
+          className={`
+          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: [1, 1.05, 1] }
+          }
+          transition={{
+            delay: 0.8,
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          Avançar
+        </motion.button>
         </motion.div>
       </motion.div>
     </div>

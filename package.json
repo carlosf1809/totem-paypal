@@ -19,6 +19,7 @@
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-qrcode-logo": "^3.0.0",
     "react-router-dom": "^6.22.3",
     "xlsx": "^0.18.5"
   },
@@ -39,5 +40,8 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
+  },
+  "overrides": {
+    "yallist": "4.1.1"
   }
 }

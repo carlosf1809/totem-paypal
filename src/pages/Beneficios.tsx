@@ -12,12 +12,12 @@ export default function MaisSuperpoderes() {
   const perfil = dados.perfil; // "leo" | "ana" | null
 
   // Se você quiser redirecionar automaticamente para /fim após X segundos:
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/acao");
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/acao");
+  //   }, 6000);
+  //   return () => clearTimeout(timer);
+  // }, [navigate]);
 
   // Poderes PayPal PPCP (para perfil "leo", pequenas/médias empresas)
   const poderesPPCP = [
@@ -81,11 +81,11 @@ export default function MaisSuperpoderes() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
               whileHover={{ scale: 1.02 }}
-              // onClick={() => {
-              //   // Exemplo: você pode redirecionar para uma landing page de Braintree
-              //   // ou apenas abrir um modal. Aqui, demonstramos navegação:
-              //   navigate("/journey-braintree");
-              // }}
+            // onClick={() => {
+            //   // Exemplo: você pode redirecionar para uma landing page de Braintree
+            //   // ou apenas abrir um modal. Aqui, demonstramos navegação:
+            //   navigate("/journey-braintree");
+            // }}
             >
               Conheça o PayPal Braintree:
             </motion.button>
@@ -118,6 +118,22 @@ export default function MaisSuperpoderes() {
             >
               <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
             </motion.div>
+            <motion.button
+              onClick={() => { navigate("/acao"); }}
+              className={`
+          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: [1, 1.05, 1] }
+              }
+              transition={{
+                delay: 0.8,
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              Avançar
+            </motion.button>
           </>
         ) : (
           // === BLOCO PARA “LEO” – Pequenas/Médias Empresas: PayPal PPCP ===
@@ -165,6 +181,22 @@ export default function MaisSuperpoderes() {
             >
               <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
             </motion.div>
+            <motion.button
+              onClick={() => { navigate("/acao"); }}
+              className={`
+          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: [1, 1.05, 1] }
+              }
+              transition={{
+                delay: 0.8,
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              Avançar
+            </motion.button>
           </>
         )}
       </div>

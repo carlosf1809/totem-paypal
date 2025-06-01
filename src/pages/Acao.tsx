@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import TecladoVirtual from "../components/TecladoVirtual";
+// Importamos o QRCode do pacote react-qrcode-logo
+import { QRCode } from "react-qrcode-logo";
 
 export default function Acao() {
   const { atualizar } = useJornada();
@@ -11,6 +13,8 @@ export default function Acao() {
 
   const [mostrarEmailInput, setMostrarEmailInput] = useState(false);
   const [email, setEmail] = useState("");
+  // novo estado para controlar o modal de QR Code
+  const [showQRModal, setShowQRModal] = useState(false);
 
   const enviarEmail = () => {
     atualizar({ email });
@@ -28,8 +32,8 @@ export default function Acao() {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      {/* Conteúdo rolável */}
-      <div className="flex-1 flex-col overflow-auto py-12 px-24">
+      {/* Conteúdo principal rolável */}
+      <div className="flex-1 flex flex-col overflow-auto py-12 px-24">
         <motion.h2
           className="text-4xl md:text-6xl font-bold text-white mb-8 text-left"
           initial={{ opacity: 0, y: -20 }}
@@ -62,10 +66,7 @@ export default function Acao() {
           </motion.button>
 
           {mostrarEmailInput && (
-            <motion.div
-              className="mt-2 flex flex-col gap-2"
-              variants={item}
-            >
+            <motion.div className="mt-2 flex flex-col gap-2" variants={item}>
               <input
                 type="email"
                 value={email}
@@ -84,7 +85,7 @@ export default function Acao() {
 
           <motion.button
             variants={item}
-            onClick={() => navigate("/mais-informacoes")}
+            onClick={() => setShowQRModal(true)} // abre o modal ao clicar
             className="bg-[#0070E0] text-white text-lg font-semibold px-8 py-5 rounded-lg shadow-md hover:bg-[#0059b2] transition w-max text-left"
           >
             Escanear QR Code e saber mais
@@ -99,6 +100,43 @@ export default function Acao() {
             onInput={(v) => setEmail((prev) => prev + v)}
             onBackspace={() => setEmail((prev) => prev.slice(0, -1))}
           />
+        </div>
+      )}
+
+      {/* Modal de QR Code */}
+      {showQRModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div
+            className="bg-white rounded-2xl w-11/12 max-w-md p-6 relative"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Botão fechar */}
+            <button
+              onClick={() => setShowQRModal(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+            >
+              ✕
+            </button>
+
+            <h3 className="text-2xl font-bold text-[#1A1A1A] mb-4">
+              Acesse o PayPal
+            </h3>
+            <p className="text-gray-700 mb-6">
+              Escaneie este QR Code para visitar o site do PayPal:
+            </p>
+
+            <div className="flex justify-center">
+              <QRCode
+                value="https://www.paypal.com"
+                size={200}
+                bgColor="white"
+                fgColor="#0070E0"
+                quietZone={10}
+              />
+            </div>
+          </motion.div>
         </div>
       )}
     </div>
