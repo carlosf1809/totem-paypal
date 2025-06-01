@@ -172,6 +172,16 @@ export default function MaisSuperpoderes() {
               >
                 Avançar
               </motion.button>
+
+        {/* Footnote */}
+        <motion.p
+          className="text-xs text-gray-400 mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 0.5 }}
+        >
+          * sob aprovação
+        </motion.p>
       </div>
     </div>
   );
