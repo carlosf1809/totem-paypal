@@ -15,15 +15,15 @@ const teclas: string[][] = [
 
 export default function TecladoVirtual({ onInput, onBackspace }: TecladoProps) {
   return (
-    <div className="w-full bg-white/90 backdrop-blur-md border-t border-gray-200 p-8">
-      <div className="mx-auto space-y-4">
+    <div className="w-full bg-white/90 backdrop-blur-md border-t border-gray-200 p-6">
+      <div className="mx-auto space-y-3">
         {teclas.map((linha, i) => (
-          <div key={i} className="flex justify-center gap-4 flex-wrap text-black">
+          <div key={i} className="flex justify-center gap-3 flex-wrap text-black">
             {linha.map((t) => (
               <button
                 key={t}
-                className={`bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-lg px-6 py-4 text-2xl font-bold shadow-lg transition-all duration-150 ${
-                  t === "space" ? "min-w-[280px] min-h-[80px]" : "min-w-[80px] min-h-[80px]"
+                className={`bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-lg px-5 py-3 text-xl font-bold shadow-lg transition-all duration-150 ${
+                  t === "space" ? "min-w-[240px] min-h-[70px]" : "min-w-[70px] min-h-[70px]"
                 } hover:shadow-xl transform hover:scale-105 active:scale-95`}
                 onClick={() => {
                   if (t === "back") {
