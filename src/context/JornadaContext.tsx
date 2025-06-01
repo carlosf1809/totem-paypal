@@ -11,6 +11,7 @@ interface JornadaData {
   email?: string;
   fullName?: string;
   phone?: string;
+  company?: string;
 }
 
 
@@ -29,6 +30,7 @@ const defaultValues: JornadaData = {
   email: undefined,
   fullName: undefined,
   phone: undefined,
+  company: undefined,
 };
 
 export const JornadaProvider = ({ children }: { children: ReactNode }) => {

@@ -10,7 +10,7 @@ const teclas: string[][] = [
   ["q","w","e","r","t","y","u","i","o","p"],
   ["a","s","d","f","g","h","j","k","l"],
   ["@","z","x","c","v","b","n","m",".",","] ,
-  ["back",".com"],
+  ["back","space",".com"],
 ];
 
 export default function TecladoVirtual({ onInput, onBackspace }: TecladoProps) {
@@ -22,10 +22,20 @@ export default function TecladoVirtual({ onInput, onBackspace }: TecladoProps) {
             {linha.map((t) => (
               <button
                 key={t}
-                className="bg-gray-200 hover:bg-gray-300 rounded px-4 py-2 text-lg font-semibold min-w-[50px] shadow"
-                onClick={() => t === "back" ? onBackspace() : onInput(t)}
+                className={`bg-gray-200 hover:bg-gray-300 rounded px-4 py-2 text-lg font-semibold shadow ${
+                  t === "space" ? "min-w-[200px]" : "min-w-[50px]"
+                }`}
+                onClick={() => {
+                  if (t === "back") {
+                    onBackspace();
+                  } else if (t === "space") {
+                    onInput(" ");
+                  } else {
+                    onInput(t);
+                  }
+                }}
               >
-                {t === "back" ? "⌫" : t}
+                {t === "back" ? "⌫" : t === "space" ? "Espaço" : t}
               </button>
             ))}
           </div>
