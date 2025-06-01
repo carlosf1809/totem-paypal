@@ -73,15 +73,14 @@ export default function MaisSuperpoderes() {
           // === BLOCO PARA "ANA" – Grandes Empresas: Braintree ===
           <>
             {/* 1) CTA principal */}
-            <motion.button
-              className="bg-[#0070E0] px-10 py-5 rounded-lg text-xl font-semibold text-left text-white mb-8 w-max"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+            <motion.h3
+              className="text-2xl md:text-3xl font-semibold text-white mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              whileHover={{ scale: 1.02 }}
             >
-              Conheça o PayPal Braintree
-            </motion.button>
+              Conheça o PayPal Braintree:
+            </motion.h3>
 
             {/* 2) Lista de "superpoderes" do Braintree */}
             <motion.ul
@@ -117,24 +116,19 @@ export default function MaisSuperpoderes() {
         ) : (
           // === BLOCO PARA "LEO" – Pequenas/Médias Empresas: PPCP ===
           <>
-            {/* 1) CTA principal */}
-            <motion.button
-              className="bg-[#0070E0] px-10 py-5 rounded-lg text-xl font-semibold text-left text-white mb-8 w-max"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+            {/* 1) CTA principal
+            <motion.h3
+              className="text-2xl md:text-3xl font-semibold text-white mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              onClick={() => {
-                // Botão "Ver mais detalhes" pode navegar para outra página
-                navigate("/journey-ppcp"); 
-              }}
             >
-              Ver mais detalhes
-            </motion.button>
+              Ver mais detalhes:
+            </motion.h3> */}
 
             {/* 2) Lista de "superpoderes" do PPCP */}
             <motion.ul
-              className="space-y-12 mb-8"
+              className="space-y-12 mb-8 mt-16"
               initial="hidden"
               animate="visible"
               variants={containerVariants}

@@ -9,6 +9,8 @@ interface JornadaData {
   canal: Canal[];            // agora é array
   desafios: string[];
   email?: string;
+  fullName?: string;
+  phone?: string;
 }
 
 
@@ -25,6 +27,8 @@ const defaultValues: JornadaData = {
   canal: [],     // array vazio
   desafios: [],
   email: undefined,
+  fullName: undefined,
+  phone: undefined,
 };
 
 export const JornadaProvider = ({ children }: { children: ReactNode }) => {
