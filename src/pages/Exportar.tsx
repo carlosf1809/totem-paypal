@@ -11,14 +11,26 @@ export default function Exportar() {
   }, []);
 
   const exportarParaExcel = () => {
-    if (jornadas.length === 0) return alert("Nenhuma jornada para exportar.");
+    if (jornadas.length === 0) {
+      return alert("Nenhuma jornada para exportar.");
+    }
 
-    // Transforma objetos em linhas de Excel
-    const ws = XLSX.utils.json_to_sheet(jornadas);
+    // 1) Transformamos cada objeto de jornada em uma versão "achatada",
+    //    onde arrays viram strings separadas por vírgula:
+    const linhasParaExcel = jornadas.map((j) => ({
+      data: j.data,
+      email: j.email,
+      perfil: j.perfil,
+      canal: Array.isArray(j.canal) ? j.canal.join(", ") : j.canal || "",
+      desafios: Array.isArray(j.desafios) ? j.desafios.join(", ") : j.desafios || "",
+    }));
+
+    // 2) Gera a planilha a partir do JSON "achatado"
+    const ws = XLSX.utils.json_to_sheet(linhasParaExcel);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Jornadas");
 
-    // Cria e baixa o arquivo
+    // 3) Faz o download do arquivo
     XLSX.writeFile(wb, "jornadas_paypal.xlsx");
   };
 
@@ -42,12 +54,15 @@ export default function Exportar() {
           📊 Baixar Excel
         </button>
 
-        {/* <button
+        {/* Se quiser liberar o botão de limpeza, basta descomentar */}
+        {/*
+        <button
           onClick={limpar}
           className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700"
         >
           🗑️ Apagar tudo
-        </button> */}
+        </button>
+        */}
       </div>
     </div>
   );

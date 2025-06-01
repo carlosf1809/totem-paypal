@@ -17,18 +17,18 @@ export default function Fim() {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   salvarNovaJornada(dados);
+  useEffect(() => {
+    salvarNovaJornada(dados);
 
-  //   const myCanvas = canvasRef.current;
-  //   if (myCanvas) {
-  //     const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
-  //     myConfetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-  //   }
+    const myCanvas = canvasRef.current;
+    if (myCanvas) {
+      const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
+      myConfetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+    }
 
-  //   const timeout = setTimeout(reiniciar, 10000);
-  //   return () => clearTimeout(timeout);
-  // }, []);
+    const timeout = setTimeout(reiniciar, 10000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">

@@ -2,24 +2,15 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
-import { useEffect } from "react";
 import { useJornada } from "../context/JornadaContext";
 import IconeTrofeu from "../assets/trofeu.png";
 
 export default function MaisSuperpoderes() {
   const navigate = useNavigate();
   const { dados } = useJornada();
-  const perfil = dados.perfil; // "leo" | "ana" | null
+  const perfil = dados.perfil; // pode ser "leo" | "ana" | null
 
-  // Se você quiser redirecionar automaticamente para /fim após X segundos:
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigate("/acao");
-  //   }, 6000);
-  //   return () => clearTimeout(timer);
-  // }, [navigate]);
-
-  // Poderes PayPal PPCP (para perfil "leo", pequenas/médias empresas)
+  // Listas de “superpoderes”
   const poderesPPCP = [
     "Mais conversão.",
     "Checkout rápido.",
@@ -28,7 +19,6 @@ export default function MaisSuperpoderes() {
     "Adquirência própria no Brasil.",
   ];
 
-  // Poderes PayPal/Braintree (para perfil "ana", grandes empresas)
   const poderesBraintree = [
     "Adquirência própria",
     "Tokenização com as Bandeiras (NT) + Pass Through",
@@ -44,7 +34,7 @@ export default function MaisSuperpoderes() {
     "Carteira Digital (PayPal, Apple Pay, Google Pay)",
   ];
 
-  // Framer-Motion: variantes de container e de itens
+  // Framer-Motion: variantes
   const containerVariants = {
     hidden: {},
     visible: {
@@ -61,18 +51,26 @@ export default function MaisSuperpoderes() {
   return (
     <div className="w-full h-screen flex items-center justify-center overflow-auto py-12">
       <div className="max-w-3xl w-full px-8">
-        {/* === Título Geral === */}
+        {/* Título */}
         <motion.h2
           className="text-5xl md:text-6xl font-bold text-white text-left mb-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {perfil === "grandes" ? "Mais superpoderes para você!" : "O que você ganha com as soluções de pagamento do PayPal"}
+          {/* Altera o título conforme perfil */}
+          {perfil === "grandes"
+            ? "Mais superpoderes para você!"
+            : "O que você ganha com as soluções de pagamento do PayPal"}
         </motion.h2>
 
+        {/*
+          Se perfil === "ana" (grandes empresas):
+            mostramos os superpoderes do Braintree e botao de avançar
+          Senão (perfil === "leo" ou null), mostramos o pacote PPCP
+        */}
         {perfil === "grandes" ? (
-          // === BLOCO PARA “ANA” – Grandes Empresas: PayPal/Braintree ===
+          // === BLOCO PARA “ANA” – Grandes Empresas: Braintree ===
           <>
             {/* 1) CTA principal */}
             <motion.button
@@ -81,18 +79,13 @@ export default function MaisSuperpoderes() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
               whileHover={{ scale: 1.02 }}
-            // onClick={() => {
-            //   // Exemplo: você pode redirecionar para uma landing page de Braintree
-            //   // ou apenas abrir um modal. Aqui, demonstramos navegação:
-            //   navigate("/journey-braintree");
-            // }}
             >
-              Conheça o PayPal Braintree:
+              Conheça o PayPal Braintree
             </motion.button>
 
             {/* 2) Lista de “superpoderes” do Braintree */}
             <motion.ul
-              className="space-y-10 mb-24"
+              className="space-y-10 mb-8"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -109,34 +102,20 @@ export default function MaisSuperpoderes() {
               ))}
             </motion.ul>
 
-            {/* 3) Ícone extra no fim (opcional) */}
+            {/* 3) Ícone extra + botão “Avançar” animado */}
             <motion.div
-              className="flex justify-start"
+              className="flex flex-col items-start mt-8"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.8, duration: 0.5 }}
             >
-              <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
+              <img src={IconeTrofeu} alt="Ícone troféu" className="w-20 h-20 mb-4" />
+
+              
             </motion.div>
-            <motion.button
-              onClick={() => { navigate("/acao"); }}
-              className={`
-          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: [1, 1.05, 1] }
-              }
-              transition={{
-                delay: 0.8,
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              Avançar
-            </motion.button>
           </>
         ) : (
-          // === BLOCO PARA “LEO” – Pequenas/Médias Empresas: PayPal PPCP ===
+          // === BLOCO PARA “LEO” – Pequenas/Médias Empresas: PPCP ===
           <>
             {/* 1) CTA principal */}
             <motion.button
@@ -146,8 +125,8 @@ export default function MaisSuperpoderes() {
               transition={{ delay: 0.3, duration: 0.4 }}
               whileHover={{ scale: 1.02 }}
               onClick={() => {
-                // Exemplo: navegar para a página de “JourneyPPCP”
-                // navigate("/journey-ppcp");
+                // Botão “Ver mais detalhes” pode navegar para outra página
+                navigate("/journey-ppcp"); 
               }}
             >
               Ver mais detalhes
@@ -155,7 +134,7 @@ export default function MaisSuperpoderes() {
 
             {/* 2) Lista de “superpoderes” do PPCP */}
             <motion.ul
-              className="space-y-12"
+              className="space-y-12 mb-8"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -172,33 +151,33 @@ export default function MaisSuperpoderes() {
               ))}
             </motion.ul>
 
-            {/* 3) Ícone extra no fim (opcional) */}
+            {/* 3) Ícone extra + botão “Avançar” animado */}
             <motion.div
-              className="flex justify-start mt-8"
+              className="flex flex-col items-start mt-8"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.8, duration: 0.5 }}
             >
-              <img src={IconeTrofeu} alt="Ícone" className="w-20 h-20" />
+              <img src={IconeTrofeu} alt="Ícone troféu" className="w-20 h-20 mb-4" />
+
+            
             </motion.div>
-            <motion.button
-              onClick={() => { navigate("/acao"); }}
-              className={`
-          mt-12 px-18 py-8 rounded-sm font-medium text-2xl transition-all bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: [1, 1.05, 1] }
-              }
-              transition={{
-                delay: 0.8,
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              Avançar
-            </motion.button>
           </>
         )}
+        <motion.button
+                onClick={() => navigate("/acao")}
+                className="px-12 py-4 rounded-lg font-medium text-2xl bg-[#0070E0] text-white hover:bg-[#0059b2] cursor-pointer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+                transition={{
+                  delay: 2.2,
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                Avançar
+              </motion.button>
       </div>
     </div>
   );

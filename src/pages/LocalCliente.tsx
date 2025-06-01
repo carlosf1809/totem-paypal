@@ -41,6 +41,7 @@ export default function LocalCliente() {
   };
 
   const proximo = () => {
+    console.log(selecionados)
     // Agora Canal[] casa corretamente com JornadaData.canal
     atualizar({ canal: selecionados });
     navigate("/viloes");

@@ -32,6 +32,7 @@ export const JornadaProvider = ({ children }: { children: ReactNode }) => {
 
   const atualizar = (novosDados: Partial<JornadaData>) => {
     setDados((prev) => ({ ...prev, ...novosDados }));
+    console.log(dados);
   };
 
   const resetar = () => {
