@@ -326,7 +326,7 @@ export default function Acao() {
 
               <motion.button
                 onClick={() => navigate('/')}
-                className="px-6 py-3 border-2 border-white text-white bg-transparent rounded-lg hover:bg-white hover:text-gray-800 transition-colors font-medium"
+                className="px-6 py-3 bg-white text-[#0070E0] border-2 border-white rounded-lg hover:bg-gray-100 transition-colors font-medium"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
