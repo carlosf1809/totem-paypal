@@ -135,12 +135,7 @@ export default function JourneyCompletePayments() {
         </motion.div>
 
         {/* === Payment Images === */}
-        <motion.div
-          className="overflow-hidden rounded-2xl"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.0, duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="flex gap-4">
           <img
             src={Pagamento1}
             alt="Pagamento 1"
@@ -151,7 +146,7 @@ export default function JourneyCompletePayments() {
             alt="Pagamento 2"
             className="w-1/2 object-cover rounded-xl"
           />
-        </motion.div>
+        </div>
 
         <motion.button
           onClick={() => { navigate("/beneficios"); }}

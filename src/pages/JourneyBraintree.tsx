@@ -2,11 +2,11 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react"
 import { motion } from "framer-motion";
-import IconAcquirer from "../assets/icon-acquirer.png"; // ícone “Adquirência própria”
-import IconGlobal from "../assets/icon-global.png";   // ícone “Única integração, alcance global”
-import IconFraud from "../assets/icon-fraud.png";     // ícone “Proteção contra fraudes avançadas”
-import ImgCheckout1 from "../assets/pagemento1.png";   // captura de tela 1
-import ImgCheckout2 from "../assets/pagamento2.png";   // captura de tela 2
+import IconAcquirer from "../assets/icon-acquirer.png"; // ícone "Adquirência própria"
+import IconGlobal from "../assets/icon-global.png";   // ícone "Única integração, alcance global"
+import IconFraud from "../assets/icon-fraud.png";     // ícone "Proteção contra fraudes avançadas"
+import BraintreeCheckout1 from "../assets/braintree-checkout-1.png";
+import BraintreeCheckout2 from "../assets/braintree-checkout-2.png";
 
 
 export default function JourneyBraintree() {
@@ -116,29 +116,29 @@ export default function JourneyBraintree() {
         </motion.ul>
 
         {/* ===== IMAGENS DE CHECKOUT ===== */}
-        <div className="flex flex-col justify-center items-center gap-6">
+        <div className="flex gap-4 justify-center items-center">
           <motion.div
-            className="w-[80%] overflow-hidden rounded-lg"
+            className="w-1/2 overflow-hidden rounded-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
           >
             <img
-              src={ImgCheckout1}
-              alt="Checkout Braintree - Exemplo 1"
+              src={BraintreeCheckout1}
+              alt="Checkout Braintree 1"
               className="w-full object-cover"
             />
           </motion.div>
 
           <motion.div
-            className="w-[80%] overflow-hidden rounded-lg"
+            className="w-1/2 overflow-hidden rounded-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.2, duration: 0.6, ease: "easeOut" }}
+            transition={{ delay: 1.0, duration: 0.6, ease: "easeOut" }}
           >
             <img
-              src={ImgCheckout2}
-              alt="Checkout Braintree - Exemplo 2"
+              src={BraintreeCheckout2}
+              alt="Checkout Braintree 2"
               className="w-full object-cover"
             />
           </motion.div>
@@ -159,6 +159,16 @@ export default function JourneyBraintree() {
         >
           Avançar
         </motion.button>
+
+        {/* Footnote */}
+        <motion.p
+          className="text-xs text-gray-500 mt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
+        >
+          * sob aprovação
+        </motion.p>
       </motion.div>
     </div>
   );
