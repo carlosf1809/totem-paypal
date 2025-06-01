@@ -12,11 +12,11 @@ export default function MaisSuperpoderes() {
 
   // Listas de "superpoderes"
   const poderesPPCP = [
-    "Mais conversão.",
-    "Checkout rápido.",
-    "Carteiras digitais.",
-    "Segurança antifraude.",
-    "Adquirência própria no Brasil.",
+    "Mais conversão",
+    "Checkout rápido",
+    "Carteiras digitais",
+    "Segurança antifraude",
+    "Adquirência própria no Brasil",
   ];
 
   const poderesBraintree = [

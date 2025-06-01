@@ -30,7 +30,7 @@ export default function LocalCliente() {
     {
       id: "ecommerce",
       icon: IconVolume,
-      text: "Tenho site com grande volume de vendas",
+      text: "Tenho site com grande volume de vendas.",
     },
   ];
 

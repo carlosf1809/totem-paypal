@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import { useJornada } from "../context/JornadaContext";
 
 const VILOES = [
-  "Clientes abandonam o carrinho.",
-  "Checkout muito demorado.",
-  "Limitações para escalar globalmente.",
+  "Clientes abandonam o carrinho",
+  "Checkout muito demorado",
+  "Limitações para escalar globalmente",
   "Não tenho meios de pagamento confiáveis",
-  "Recebo pedidos pelas redes sociais, mas não tenho como cobrar.",
-  "Fraudes e chargebacks.",
+  "Recebo pedidos pelas redes sociais, mas não tenho como cobrar",
+  "Fraudes e chargebacks",
 ];
 
 export default function ViloesLimite() {
