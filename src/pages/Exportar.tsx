@@ -19,7 +19,10 @@ export default function Exportar() {
     //    onde arrays viram strings separadas por vírgula:
     const linhasParaExcel = jornadas.map((j) => ({
       data: j.data,
-      email: j.email,
+      email: j.email || "Não informado",
+      fullName: j.fullName || "Não informado", 
+      phone: j.phone || "Não informado",
+      company: j.company || "Não informado",
       perfil: j.perfil,
       canal: Array.isArray(j.canal) ? j.canal.join(", ") : j.canal || "",
       desafios: Array.isArray(j.desafios) ? j.desafios.join(", ") : j.desafios || "",
