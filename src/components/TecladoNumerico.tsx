@@ -32,7 +32,7 @@ export default function TecladoNumerico({ onInput, onBackspace }: TecladoNumeric
             {linha.map((t) => (
               <button
                 key={t}
-                className="bg-gray-200 hover:bg-gray-300 rounded px-6 py-4 text-xl font-semibold min-w-[60px] min-h-[60px] shadow text-black"
+                className="bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-lg px-6 py-4 text-3xl font-bold min-w-[100px] min-h-[100px] shadow-lg text-black transition-all duration-150 hover:shadow-xl transform hover:scale-105 active:scale-95"
                 onClick={() => handleClick(t)}
               >
                 {t === "back" ? "⌫" : t === "clear" ? "🗑️" : t}

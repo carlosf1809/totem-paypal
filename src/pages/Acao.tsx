@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import TecladoVirtual from "../components/TecladoVirtual";
 import TecladoNumerico from "../components/TecladoNumerico";
-import { QRCode } from "react-qrcode-logo";
+import { QRCodeCanvas } from "qrcode.react";
 
 export default function Acao() {
   const { atualizar } = useJornada();
@@ -20,6 +20,9 @@ export default function Acao() {
   // UI states
   const [currentField, setCurrentField] = useState<'fullName' | 'email' | 'phone' | 'company'>('fullName');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Validation computed property
+  const isFormValid = email.trim() || phone.trim();
 
   const saveContactData = async () => {
     // New validation: Name is optional, but require either phone OR email
@@ -167,166 +170,212 @@ export default function Acao() {
   };
 
   return (
-    <div className="relative w-full h-screen flex overflow-hidden">
-      {/* Left side - Contact Form */}
-      <div className="flex-1 flex flex-col items-center justify-center overflow-auto py-12 px-12">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold text-white mb-8 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Deixe seus dados para contato
-        </motion.h2>
+    <div className="relative w-full h-screen flex flex-col overflow-hidden bg-white">
+      {/* Main content area - takes only needed space */}
+      <div className="flex" style={{ backgroundColor: 'var(--paypal-dark)' }}>
+        {/* Left side - Contact Form */}
+        <div className="flex-1 flex flex-col justify-start overflow-auto py-8 px-12">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-white mb-6 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Deixe seus dados para contato
+          </motion.h2>
 
-        <motion.div
-          className="flex flex-col gap-6 w-full max-w-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <p className="text-white text-lg mb-4 text-center">
-            Preencha seus dados para que possamos entrar em contato:
-          </p>
-
-          {/* Form Fields */}
-          <div className="space-y-4">
-            {/* Full Name Field */}
-            <div className={`p-4 rounded-lg border-2 transition-all ${
-              currentField === 'fullName' ? 'border-[#0070E0] bg-white/10' : 'border-gray-400 bg-white/5'
-            }`}>
-              <label className="block text-white text-sm font-medium mb-2">
-                Nome Completo (opcional)
-              </label>
-              <div className="text-white text-lg min-h-[32px] p-2 bg-black/20 rounded">
-                {fullName || (currentField === 'fullName' ? '|' : '')}
-              </div>
-            </div>
-
-            {/* Email Field */}
-            <div className={`p-4 rounded-lg border-2 transition-all ${
-              currentField === 'email' ? 'border-[#0070E0] bg-white/10' : 'border-gray-400 bg-white/5'
-            }`}>
-              <label className="block text-white text-sm font-medium mb-2">
-                E-mail
-              </label>
-              <div className="text-white text-lg min-h-[32px] p-2 bg-black/20 rounded">
-                {email || (currentField === 'email' ? '|' : '')}
-              </div>
-            </div>
-
-            {/* Phone Field */}
-            <div className={`p-4 rounded-lg border-2 transition-all ${
-              currentField === 'phone' ? 'border-[#0070E0] bg-white/10' : 'border-gray-400 bg-white/5'
-            }`}>
-              <label className="block text-white text-sm font-medium mb-2">
-                Telefone
-              </label>
-              <div className="text-white text-lg min-h-[32px] p-2 bg-black/20 rounded">
-                {phone || (currentField === 'phone' ? '|' : '')}
-              </div>
-            </div>
-
-            {/* Company Field */}
-            <div className={`p-4 rounded-lg border-2 transition-all ${
-              currentField === 'company' ? 'border-[#0070E0] bg-white/10' : 'border-gray-400 bg-white/5'
-            }`}>
-              <label className="block text-white text-sm font-medium mb-2">
-                Empresa (opcional)
-              </label>
-              <div className="text-white text-lg min-h-[32px] p-2 bg-black/20 rounded">
-                {company || (currentField === 'company' ? '|' : '')}
-              </div>
-            </div>
-          </div>
-
-          {/* Validation Notice */}
-          <div className="bg-yellow-500/20 border border-yellow-500/50 p-4 rounded-lg">
-            <p className="text-yellow-200 text-sm">
-              <strong>Atenção:</strong> O nome é opcional, mas é necessário informar pelo menos um: E-mail OU Telefone
+          <motion.div
+            className="flex flex-col gap-4 w-full max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <p className="text-white/90 mb-6 text-center text-lg">
+              Preencha seus dados para que possamos entrar em contato:
             </p>
-          </div>
 
-          {/* Navigation Instructions
-          <div className="bg-white/10 p-4 rounded-lg">
-            <p className="text-white text-sm">
-              <strong>Campo atual:</strong> {getFieldLabel()}<br/>
-              <strong>Teclado:</strong> {currentField === 'phone' ? 'Numérico (ideal para telefone)' : 'Completo (com letras e símbolos)'}<br/>
-              <strong>Navegação:</strong> Use os botões abaixo para alternar entre campos e enviar
+            {/* Nome Completo */}
+            <div className="space-y-2">
+              <label className="text-white text-sm font-medium">Nome Completo (opcional)</label>
+              <div 
+                className={`relative border-2 rounded-lg transition-all cursor-text ${
+                  currentField === 'fullName' 
+                    ? 'border-[#0070E0] bg-blue-50' 
+                    : 'border-gray-300 bg-white hover:border-gray-400'
+                }`}
+                onClick={() => setCurrentField('fullName')}
+              >
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={() => {}} // Controlled by virtual keyboard
+                  className="w-full px-4 py-3 text-lg bg-transparent border-none outline-none text-gray-800"
+                  placeholder="Digite seu nome completo"
+                  readOnly
+                />
+                {currentField === 'fullName' && (
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#0070E0] animate-pulse">|</span>
+                )}
+              </div>
+            </div>
+
+            {/* E-mail */}
+            <div className="space-y-2">
+              <label className="text-white text-sm font-medium">E-mail</label>
+              <div 
+                className={`relative border-2 rounded-lg transition-all cursor-text ${
+                  currentField === 'email' 
+                    ? 'border-[#0070E0] bg-blue-50' 
+                    : 'border-gray-300 bg-white hover:border-gray-400'
+                }`}
+                onClick={() => setCurrentField('email')}
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={() => {}} // Controlled by virtual keyboard
+                  className="w-full px-4 py-3 text-lg bg-transparent border-none outline-none text-gray-800"
+                  placeholder="Digite seu e-mail"
+                  readOnly
+                />
+                {currentField === 'email' && (
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#0070E0] animate-pulse">|</span>
+                )}
+              </div>
+            </div>
+
+            {/* Telefone */}
+            <div className="space-y-2">
+              <label className="text-white text-sm font-medium">Telefone</label>
+              <div 
+                className={`relative border-2 rounded-lg transition-all cursor-text ${
+                  currentField === 'phone' 
+                    ? 'border-[#0070E0] bg-blue-50' 
+                    : 'border-gray-300 bg-white hover:border-gray-400'
+                }`}
+                onClick={() => setCurrentField('phone')}
+              >
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={() => {}} // Controlled by virtual keyboard
+                  className="w-full px-4 py-3 text-lg bg-transparent border-none outline-none text-gray-800"
+                  placeholder="Digite seu telefone"
+                  readOnly
+                />
+                {currentField === 'phone' && (
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#0070E0] animate-pulse">|</span>
+                )}
+              </div>
+            </div>
+
+            {/* Empresa */}
+            <div className="space-y-2">
+              <label className="text-white text-sm font-medium">Empresa (opcional)</label>
+              <div 
+                className={`relative border-2 rounded-lg transition-all cursor-text ${
+                  currentField === 'company' 
+                    ? 'border-[#0070E0] bg-blue-50' 
+                    : 'border-gray-300 bg-white hover:border-gray-400'
+                }`}
+                onClick={() => setCurrentField('company')}
+              >
+                <input
+                  type="text"
+                  value={company}
+                  onChange={() => {}} // Controlled by virtual keyboard
+                  className="w-full px-4 py-3 text-lg bg-transparent border-none outline-none text-gray-800"
+                  placeholder="Digite o nome da sua empresa"
+                  readOnly
+                />
+                {currentField === 'company' && (
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#0070E0] animate-pulse">|</span>
+                )}
+              </div>
+            </div>
+
+            {/* Validation message */}
+            {!isFormValid && (
+              <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg">
+                <p className="text-sm font-medium">
+                  ⚠️ Atenção: O nome é opcional, mas é necessário informar pelo menos um: E-mail OU Telefone
+                </p>
+              </div>
+            )}
+
+            {/* Navigation buttons */}
+            <div className="flex gap-4 mt-6">
+              <motion.button
+                onClick={moveToPreviousField}
+                disabled={currentField === 'fullName'}
+                className="px-6 py-3 bg-gray-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                ← Campo Anterior
+              </motion.button>
+              
+              <motion.button
+                onClick={currentField === 'company' ? saveContactData : moveToNextField}
+                className="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {currentField === 'company' ? 'Enviar Dados' : 'Próximo Campo →'}
+              </motion.button>
+
+              <motion.button
+                onClick={() => navigate('/')}
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Sair
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right side - QR Code */}
+        <div className="w-96 flex flex-col justify-center items-center p-8">
+          <motion.div
+            className="bg-white rounded-2xl p-8 shadow-2xl max-w-sm w-full"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
+              Acesse o PayPal
+            </h3>
+            <p className="text-gray-600 text-sm mb-6 text-center">
+              Escaneie este QR Code para visitar o site do PayPal:
             </p>
-          </div> */}
-
-          {/* Form Navigation Buttons */}
-          <div className="flex gap-4 flex-wrap">
-            <button
-              onClick={moveToPreviousField}
-              disabled={currentField === 'fullName'}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition"
-            >
-              ← Campo Anterior
-            </button>
             
-            <button
-              onClick={moveToNextField}
-              disabled={isSubmitting}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition disabled:opacity-50"
-            >
-              {currentField === 'company' ? 'Enviar Dados' : 'Próximo Campo →'}
-            </button>
-
-            {/* <button
-              onClick={() => navigate("/fim")}
-              className="bg-[#0070E0] text-white px-6 py-3 rounded-lg hover:bg-[#0059b2] transition"
-            >
-              Pular e conversar com especialista
-            </button> */}
-          </div>
-        </motion.div>
+            <div className="flex justify-center mb-4">
+              <QRCodeCanvas
+                value="https://www.paypal.com/br"
+                size={200}
+                level="M"
+                includeMargin={true}
+                className="border border-gray-200 rounded-lg"
+                fgColor="#003087"
+                bgColor="#FFFFFF"
+              />
+            </div>
+            
+            <p className="text-xs text-gray-500 text-center">
+              https://www.paypal.com/br
+            </p>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Right side - QR Code */}
-      <div className="w-96 flex flex-col justify-center items-center p-12 bg-white/5 border-l border-white/20">
-        <motion.div
-          className="bg-white rounded-2xl p-6 text-center shadow-xl"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h3 className="text-2xl font-bold text-[#1A1A1A] mb-4">
-            Acesse o PayPal
-          </h3>
-          <p className="text-gray-700 mb-6">
-            Escaneie este QR Code para visitar o site do PayPal:
-          </p>
-
-          <div className="flex justify-center mb-4">
-            <QRCode
-              value="https://www.paypal.com"
-              size={200}
-              bgColor="white"
-              fgColor="#0070E0"
-              quietZone={10}
-            />
-          </div>
-          
-          <p className="text-gray-600 text-sm">
-            paypal.com
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Virtual Keyboard - show different keyboards based on field */}
-      <div className="absolute bottom-0 left-0 w-full">
+      {/* Keyboard area - white background */}
+      <div className="bg-white">
         {currentField === 'phone' ? (
-          <TecladoNumerico
-            onInput={handleVirtualKeyboardInput}
-            onBackspace={handleBackspace}
-          />
+          <TecladoNumerico onInput={handleVirtualKeyboardInput} onBackspace={handleBackspace} />
         ) : (
-          <TecladoVirtual
-            onInput={handleVirtualKeyboardInput}
-            onBackspace={handleBackspace}
-          />
+          <TecladoVirtual onInput={handleVirtualKeyboardInput} onBackspace={handleBackspace} />
         )}
       </div>
     </div>

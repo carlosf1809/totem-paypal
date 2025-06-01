@@ -66,7 +66,7 @@ export default function Perfil() {
               </div>
             </div>
               <button
-                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-3xl font-medium px-12 py-3 rounded-sm shadow whitespace-nowrap"
+                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-xl md:text-2xl lg:text-3xl font-medium px-4 md:px-8 lg:px-12 py-3 rounded-sm shadow text-center leading-tight"
               >
                 Pequena/média empresa
               </button>
@@ -96,7 +96,7 @@ export default function Perfil() {
               </div>
             </div>
               <button
-                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-3xl font-medium  px-12 py-3 rounded-sm shadow  whitespace-nowrap"
+                className="absolute bottom-[-20px] w-full bg-[#0070E0] text-white text-xl md:text-2xl lg:text-3xl font-medium px-4 md:px-8 lg:px-12 py-3 rounded-sm shadow text-center leading-tight"
               >
                 Grande empresa
               </button>
