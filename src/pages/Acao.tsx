@@ -375,7 +375,11 @@ export default function Acao() {
         {currentField === 'phone' ? (
           <TecladoNumerico onInput={handleVirtualKeyboardInput} onBackspace={handleBackspace} />
         ) : (
-          <TecladoVirtual onInput={handleVirtualKeyboardInput} onBackspace={handleBackspace} />
+          <TecladoVirtual 
+            onInput={handleVirtualKeyboardInput} 
+            onBackspace={handleBackspace} 
+            onEnter={currentField === 'company' ? saveContactData : moveToNextField}
+          />
         )}
       </div>
     </div>
